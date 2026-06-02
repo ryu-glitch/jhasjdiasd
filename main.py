@@ -684,7 +684,7 @@ def tg_callback():
     db=load_data()
     db.setdefault("users",{})
     if tuid not in db["users"]:
-        db["users"][tuid]={"username":tuname,"first_name":tfirst,"credits":0,"used_credits":0,"duration":99999999,"used_time":0,"used":True,"created":time.time()}
+        db["users"][tuid]={"username":tuname,"first_name":tfirst,"credits":20,"used_credits":0,"duration":99999999,"used_time":0,"used":True,"created":time.time()}
     save_data(db)
     session["tuid"]=tuid;session["tuname"]=tuname
     tok=uuid.uuid4().hex
@@ -1839,8 +1839,9 @@ def api_mass():
                     d["keys"][ukey]["used_credits"]=d["keys"][ukey].get("used_credits",0)+(counts["cv"]+counts["cn"]+counts["ch"])*credit_cost
                     d["keys"][ukey].pop("check_start",None)
                 if tuid and tuid in d.get("users",{}):
-                    d["users"][tuid]["used_credits"]=d["users"][tuid].get("used_credits",0)+(counts["cv"]+counts["cn"]+counts["ch"])*credit_cost
-                    print(f"[CREDIT] tuid={tuid} cv={counts['cv']} cn={counts['cn']} ch={counts['ch']} cost={credit_cost} used={d['users'][tuid]['used_credits']}",flush=True)
+                    hit_cost=counts["cv"]+counts["ch"]
+                    d["users"][tuid]["used_credits"]=d["users"][tuid].get("used_credits",0)+hit_cost
+                    print(f"[CREDIT] tuid={tuid} live={counts['cv']} charged={counts['ch']} cost={hit_cost} used={d['users'][tuid]['used_credits']}",flush=True)
                 save_data(d)
                 sio.emit("done",room=room)
                 if tuid and tuid in d.get("users",{}):
@@ -2467,7 +2468,7 @@ def bot_verify_otp():
             chat=json.loads(r.read()).get("result",{})
             tuname=chat.get("username",tuname);tfirst=chat.get("first_name",tfirst)
         except:pass
-        db["users"][uid]={"username":tuname,"first_name":tfirst,"credits":0,"used_credits":0,"duration":99999999,"used_time":0,"used":True,"created":time.time(),"ip":request.remote_addr,"last_seen":time.time()}
+        db["users"][uid]={"username":tuname,"first_name":tfirst,"credits":20,"used_credits":0,"duration":99999999,"used_time":0,"used":True,"created":time.time(),"ip":request.remote_addr,"last_seen":time.time()}
     else:
         db["users"][uid]["ip"]=request.remote_addr
         db["users"][uid]["last_seen"]=time.time()
