@@ -3,3 +3,6 @@ flask-socketio
 aiohttp
 websocket-client
 python-dotenv
+gunicorn
+gevent
+gevent-websocket
