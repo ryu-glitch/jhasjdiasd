@@ -564,7 +564,26 @@ box-shadow:0 8px 40px rgba(0,0,0,.5)}}
 .pf-hits-label{{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase}}
 .pf-hits-count{{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:20px;font-size:11px;font-weight:700;padding:2px 9px;color:rgba(255,255,255,.7)}}
 .pf-copy-btn{{padding:4px 12px!important;font-size:10px!important;letter-spacing:1px!important;height:26px!important}}
-.pf-empty{{color:rgba(255,255,255,.25);font-size:12px;padding:20px 16px;text-align:center;font-style:italic}}'''
+.pf-empty{{color:rgba(255,255,255,.25);font-size:12px;padding:20px 16px;text-align:center;font-style:italic}}
+.stat-live .n{{color:#22c55e!important}}.st>div.stat-live{{border-color:rgba(34,197,94,.3)!important;background:rgba(34,197,94,.06)!important}}
+.stat-ccn .n{{color:#60a5fa!important}}.st>div.stat-ccn{{border-color:rgba(96,165,250,.25)!important;background:rgba(96,165,250,.05)!important}}
+.stat-chg .n{{color:#f59e0b!important}}.st>div.stat-chg{{border-color:rgba(245,158,11,.25)!important;background:rgba(245,158,11,.05)!important}}
+.stat-dead .n{{color:#ef4444!important}}
+.ck-con-hdr{{display:flex;align-items:center;gap:6px;padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.05);background:rgba(0,0,0,.25)}}
+.ck-con-dot{{width:9px;height:9px;border-radius:50%;flex-shrink:0}}
+.ck-con-title{{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.28);flex:1;text-align:center}}
+.ck-inp-hdr{{display:flex;align-items:center;gap:8px;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.05);background:rgba(0,0,0,.2)}}
+.ck-inp-dots{{display:flex;gap:5px}}
+.ck-inp-dot{{width:10px;height:10px;border-radius:50%}}
+.ck-inp-label{{font-size:10px;font-weight:700;letter-spacing:1.8px;color:rgba(255,255,255,.32);text-transform:uppercase;flex:1;text-align:center}}
+.ck-hit-panel{{padding:0!important;overflow:hidden}}
+.ck-hit-hdr{{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.05)}}
+.ck-hit-badge{{display:flex;align-items:center;gap:8px}}
+.ck-hit-glow{{width:8px;height:8px;border-radius:50%;flex-shrink:0}}
+.ck-hit-label{{font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase}}
+.ck-brand-wrap{{display:flex;align-items:center;gap:10px}}
+.ck-divider{{width:1px;height:16px;background:rgba(255,255,255,.1)}}
+@keyframes glowPulse{{0%,100%{{opacity:1}}50%{{opacity:.4}}}}'''
 
 def base(b):return f'<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NEXUS</title><script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script><style>{CSS}</style></head><body>{b}</body></html>'
 
@@ -805,7 +824,7 @@ def profile():
   <div class="pf-hits-hdr">
     <span class="pf-hits-label" style="color:#f59e0b">&#9889; CHARGED</span>
     <span class="pf-hits-count">{len(charged_hits)}</span>
-    <button class="btn bs pf-copy-btn" onclick="_cpSection('ahv')" style="margin-left:auto">COPY</button>
+    <button class="btn bs pf-copy-btn" onclick="_cpSection('ahv',this)" style="margin-left:auto">COPY</button>
   </div>
   <div id=ahv style="max-height:260px;overflow-y:auto">{ch_rows}</div>
 </div>
@@ -813,7 +832,7 @@ def profile():
   <div class="pf-hits-hdr">
     <span class="pf-hits-label" style="color:#22c55e">&#10003; LIVE</span>
     <span class="pf-hits-count">{len(live_hits)}</span>
-    <button class="btn bs pf-copy-btn" onclick="_cpSection('ahv2')" style="margin-left:auto">COPY</button>
+    <button class="btn bs pf-copy-btn" onclick="_cpSection('ahv2',this)" style="margin-left:auto">COPY</button>
   </div>
   <div id=ahv2 style="max-height:260px;overflow-y:auto">{cv_rows}</div>
 </div>
@@ -821,7 +840,7 @@ def profile():
   <div class="pf-hits-hdr">
     <span class="pf-hits-label" style="color:#60a5fa">&#9670; CCN</span>
     <span class="pf-hits-count">{len(ccn_hits)}</span>
-    <button class="btn bs pf-copy-btn" onclick="_cpSection('ahn')" style="margin-left:auto">COPY</button>
+    <button class="btn bs pf-copy-btn" onclick="_cpSection('ahn',this)" style="margin-left:auto">COPY</button>
   </div>
   <div id=ahn style="max-height:260px;overflow-y:auto">{cn_rows}</div>
 </div>
@@ -836,15 +855,16 @@ var info=(rows[i].getAttribute('data-info')||'').toLowerCase();
 rows[i].style.display=(!q||cc.startsWith(q)||info.includes(q))?'':'none';
 }}
 }};
-function _cpSection(id){{
+function _cpSection(id,btn){{
 var box=document.getElementById(id);if(!box)return;
 var rows=box.querySelectorAll('.r');var lines=[];
 rows.forEach(function(r){{var sp=r.querySelector('span:nth-child(2)');if(sp)lines.push(sp.textContent.trim());}});
 if(!lines.length)return;
-navigator.clipboard.writeText(lines.join('\\n')).then(function(){{
-var btn=event.target;btn.textContent='COPIED!';btn.style.color='#22c55e';
-setTimeout(function(){{btn.textContent='COPY';btn.style.color='';}},1500);
-}});
+var orig=btn?btn.textContent:'COPY';
+var done=function(){{if(btn){{btn.textContent='COPIED!';btn.style.color='#22c55e';setTimeout(function(){{btn.textContent=orig;btn.style.color='';}},1500);}}}};
+var txt=lines.join('\\n');
+try{{navigator.clipboard.writeText(txt).then(done).catch(function(){{var ta=document.createElement('textarea');ta.value=txt;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);done();}});}}
+catch(e){{var ta=document.createElement('textarea');ta.value=txt;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);done();}}
 }}
 </script>''')
 
@@ -876,16 +896,22 @@ def checker():
 <div class="gwlist">'''+''.join([f"<button type=button class='gwbtn{' act' if k=='1' else ''}' data-g='{k}' onclick=\"_sg('{k}');document.querySelector('.gwbar').querySelector('.gwsel span').textContent=this.textContent;document.querySelector('.gwsel').classList.remove('open');document.querySelector('.gwlist').classList.remove('open')\">{v['label']}</button>" for k,v in GATEWAYS.items()])+'</div></div>'
     gw_labels=json.dumps({k:v["label"] for k,v in GATEWAYS.items()})
     return base(f'''<div class="wrap">
-<div class="hdr"><div id=_tm style="font-size:14px;color:#fff;font-weight:700;font-family:monospace">{plan}</div><div style="display:flex;gap:6px;align-items:center"><a href=/profile class="icn" title="Profile" style="width:auto;height:32px;padding:0 12px;border-radius:6px;display:flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:#fff;text-decoration:none;letter-spacing:.5px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>PROFILE</a><button class="btn hbtn" onclick="_rd()" style="font-size:10px!important;padding:5px 12px!important;text-transform:uppercase!important;height:32px!important;color:#fff!important">REDEEM</button></div></div>
+<div class="hdr"><div class="ck-brand-wrap"><span style="font-size:15px;font-weight:900;letter-spacing:4px;color:#fff;text-shadow:0 0 18px rgba(196,30,30,.55)">⚡ NEXUS</span><span class="ck-divider"></span><span id=_tm style="font-size:13px;color:rgba(255,255,255,.85);font-weight:700;font-family:monospace">{plan}</span></div><div style="display:flex;gap:6px;align-items:center"><a href=/profile style="height:32px;padding:0 12px;border-radius:6px;display:flex;align-items:center;gap:5px;font-size:10px;font-weight:800;color:rgba(255,255,255,.8);text-decoration:none;letter-spacing:.8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);transition:all .2s"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>PROFILE</a><button class="btn hbtn" onclick="_rd()" style="font-size:10px!important;padding:0 12px!important;height:32px!important;letter-spacing:.8px!important">REDEEM</button></div></div>
 <div class="st">
-<div id=_slv><div class="n" id=_a>0</div><div class="l" id=_al>LIVE</div></div>
-<div id=_sccn><div class="n" id=_b>0</div><div class="l">CCN</div></div>
-<div id=_schg><div class="n" id=_d>0</div><div class="l">Charged</div></div>
-<div id=_sdec><div class="n" id=_c>0</div><div class="l">Declined</div></div>
+<div id=_slv class="stat-live"><div class="n" id=_a>0</div><div class="l" id=_al>LIVE</div></div>
+<div id=_sccn class="stat-ccn"><div class="n" id=_b>0</div><div class="l">CCN</div></div>
+<div id=_schg class="stat-chg"><div class="n" id=_d>0</div><div class="l">CHARGED</div></div>
+<div id=_sdec class="stat-dead"><div class="n" id=_c>0</div><div class="l">DECLINED</div></div>
 </div>
-<div class="cd">
+<div class="cd" style="padding:0;overflow:hidden">
+<div class="ck-inp-hdr">
+<div class="ck-inp-dots"><div class="ck-inp-dot" style="background:#ef4444"></div><div class="ck-inp-dot" style="background:#f59e0b"></div><div class="ck-inp-dot" style="background:#22c55e"></div></div>
+<span class="ck-inp-label">CARD INPUT — cc|mm|yy|cvv</span>
+<span style="font-size:9px;color:rgba(255,255,255,.2);font-weight:600;letter-spacing:.5px">nexus</span>
+</div>
+<div style="padding:14px 16px 16px">
 <div class="ta-wrap">
-<textarea id=_e placeholder="Paste cards here - one per line&#10;cc|mm|yy|cvv" rows=6></textarea>
+<textarea id=_e placeholder="Paste cards here — one per line&#10;4242424242424242|06|2026|123" rows=6></textarea>
 <div class="ta-acts">
 <button class="ibtn play" id=_f onclick=_tog()><span id=_fi></span></button>
 <button class="btn bg" onclick=_fm() style="border-radius:6px;height:32px;padding:0 12px;font-size:10px;display:flex;align-items:center">CLEAN</button>
@@ -899,11 +925,12 @@ def checker():
 <div style="font-size:12px;font-family:monospace;color:rgba(255,255,255,.7);white-space:nowrap;display:flex;gap:12px;font-weight:600"><span id=_spd>0/s</span><span id=_prg>0</span></div>
 </div>
 </div>
-<div class="cd hid" id=_k_wrap><div id=_k></div></div>
+</div>
+<div class="cd hid" id=_k_wrap style="padding:0;overflow:hidden"><div class="ck-con-hdr"><div class="ck-con-dot" style="background:#ef4444"></div><div class="ck-con-dot" style="background:#f59e0b"></div><div class="ck-con-dot" style="background:#22c55e;animation:glowPulse 1.4s ease-in-out infinite"></div><span class="ck-con-title">CONSOLE OUTPUT</span></div><div id=_k style="padding:4px 0"></div></div>
 <div id=_vp class="hid">
-<div class="cd"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><h2 style="margin:0;color:#f59e0b">CHARGED</h2><button class="btn bs" onclick=_cp('charged') style="padding:6px 14px;font-size:11px">COPY</button></div><div id=_hc style="max-height:380px;overflow-y:auto"></div></div>
-<div class="cd"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><h2 id=_hlv style="margin:0;color:#22c55e">LIVE</h2><button class="btn bs" onclick=_cp('live') style="padding:6px 14px;font-size:11px">COPY</button></div><div id=_hv style="max-height:380px;overflow-y:auto"></div></div>
-<div class="cd" id=_ccnp><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><h2 style="margin:0;color:#22c55e">CCN</h2><button class="btn bs" onclick=_cp('ccn') style="padding:6px 14px;font-size:11px">COPY</button></div><div id=_hn style="max-height:380px;overflow-y:auto"></div></div>
+<div class="cd ck-hit-panel" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.03)"><div class="ck-hit-hdr" style="background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.12)"><div class="ck-hit-badge"><span class="ck-hit-glow" style="background:#f59e0b;box-shadow:0 0 8px rgba(245,158,11,.8)"></span><span class="ck-hit-label" style="color:#f59e0b">CHARGED</span></div><button class="btn bs" onclick=_cp('charged') style="padding:4px 12px;font-size:10px;height:26px;letter-spacing:.5px">COPY</button></div><div id=_hc style="max-height:360px;overflow-y:auto;padding:6px 0"></div></div>
+<div class="cd ck-hit-panel" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.03)"><div class="ck-hit-hdr" style="background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.12)"><div class="ck-hit-badge"><span class="ck-hit-glow" style="background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.8)"></span><span class="ck-hit-label" id=_hlv style="color:#22c55e">LIVE</span></div><button class="btn bs" onclick=_cp('live') style="padding:4px 12px;font-size:10px;height:26px;letter-spacing:.5px">COPY</button></div><div id=_hv style="max-height:360px;overflow-y:auto;padding:6px 0"></div></div>
+<div class="cd ck-hit-panel" id=_ccnp style="border-color:rgba(96,165,250,.3);background:rgba(96,165,250,.03)"><div class="ck-hit-hdr" style="background:rgba(96,165,250,.06);border-color:rgba(96,165,250,.12)"><div class="ck-hit-badge"><span class="ck-hit-glow" style="background:#60a5fa;box-shadow:0 0 8px rgba(96,165,250,.8)"></span><span class="ck-hit-label" style="color:#60a5fa">CCN</span></div><button class="btn bs" onclick=_cp('ccn') style="padding:4px 12px;font-size:10px;height:26px;letter-spacing:.5px">COPY</button></div><div id=_hn style="max-height:360px;overflow-y:auto;padding:6px 0"></div></div>
 </div>
 </div>
 <div class="modal" id=_mod><div class="mc"><div class="mh"><h3>HIT HISTORY</h3><button class="btn br" onclick=_hm() style="padding:6px 12px;font-size:11px">CLOSE</button></div><div class="mb" id=_mb></div><div class="mbtns"><button class="btn bg" onclick=_hcop() style="padding:8px 16px;font-size:11px">COPY ALL</button><button class="btn br" onclick=_hclr() style="padding:8px 16px;font-size:11px">CLEAR</button></div></div></div>
