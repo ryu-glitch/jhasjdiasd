@@ -520,7 +520,51 @@ box-shadow:0 8px 40px rgba(0,0,0,.5)}}
 @keyframes declineIn{{from{{opacity:.65;transform:translateX(-4px)}}to{{opacity:1;transform:translateX(0)}}}}
 @media(max-width:600px){{.st{{grid-template-columns:repeat(2,1fr)}}.hit .d{{flex-direction:column}}}}
 @media(prefers-reduced-motion:reduce){{*{{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}}}
-::-webkit-scrollbar{{width:6px;height:6px}}::-webkit-scrollbar-track{{background:rgba(255,255,255,.03);border-radius:3px}}::-webkit-scrollbar-thumb{{background:rgba(255,255,255,.12);border-radius:3px}}::-webkit-scrollbar-thumb:hover{{background:rgba(255,255,255,.2)}}'''
+::-webkit-scrollbar{{width:6px;height:6px}}::-webkit-scrollbar-track{{background:rgba(255,255,255,.03);border-radius:3px}}::-webkit-scrollbar-thumb{{background:rgba(255,255,255,.12);border-radius:3px}}::-webkit-scrollbar-thumb:hover{{background:rgba(255,255,255,.2)}}
+.lbg{{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}}
+.lbg-orb{{position:absolute;border-radius:50%;filter:blur(80px);opacity:.18}}
+.lbg-orb1{{width:500px;height:500px;background:radial-gradient(circle,#c41e1e,transparent);top:-120px;left:-100px;animation:orbFloat1 12s ease-in-out infinite}}
+.lbg-orb2{{width:400px;height:400px;background:radial-gradient(circle,#7c1010,transparent);bottom:-100px;right:-80px;animation:orbFloat2 15s ease-in-out infinite}}
+@keyframes orbFloat1{{0%,100%{{transform:translate(0,0)}}50%{{transform:translate(40px,30px)}}}}
+@keyframes orbFloat2{{0%,100%{{transform:translate(0,0)}}50%{{transform:translate(-30px,-20px)}}}}
+.lw{{display:flex;justify-content:center;align-items:center;min-height:100vh;position:relative;z-index:1}}
+.lc{{width:100%;max-width:400px;background:rgba(18,10,10,.92);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:44px 32px 36px;text-align:center;box-shadow:0 0 0 1px rgba(196,30,30,.08),0 24px 60px rgba(0,0,0,.7);backdrop-filter:blur(12px)}}
+.llogo{{position:relative;display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;margin-bottom:18px}}
+.llogo-ring{{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(196,30,30,.4);animation:ringPulse 2.4s ease-in-out infinite}}
+.llogo-ring::after{{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(196,30,30,.15)}}
+.llogo-icon{{font-size:32px;position:relative;z-index:1;filter:drop-shadow(0 0 10px rgba(220,50,50,.5))}}
+@keyframes ringPulse{{0%,100%{{box-shadow:0 0 0 0 rgba(196,30,30,.3),inset 0 0 20px rgba(196,30,30,.08)}}50%{{box-shadow:0 0 0 8px rgba(196,30,30,0),inset 0 0 30px rgba(196,30,30,.12)}}}}
+.lbrand{{font-size:32px;font-weight:900;letter-spacing:8px;color:#fff;text-shadow:0 0 30px rgba(196,30,30,.5);margin-bottom:4px}}
+.lsub{{font-size:10px;font-weight:700;letter-spacing:4px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:0}}
+.ldivider{{height:1px;background:linear-gradient(90deg,transparent,rgba(196,30,30,.3),transparent);margin:22px 0 20px}}
+.lig{{text-align:left;margin-bottom:14px}}
+.llabel{{display:block;font-size:10px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}}
+.linput{{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#fff;padding:12px 14px;border-radius:8px;font-size:14px;outline:none;transition:all .2s;font-family:monospace}}
+.linput:focus{{border-color:rgba(196,30,30,.5);background:rgba(196,30,30,.04);box-shadow:0 0 0 3px rgba(196,30,30,.08)}}
+.linput::placeholder{{color:rgba(255,255,255,.2)}}
+.otpinput{{text-align:center;font-size:22px;letter-spacing:10px;font-weight:700}}
+.lbtn{{width:100%;margin-top:6px;padding:13px;background:linear-gradient(135deg,#b91c1c,#c41e1e,#dc2626);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:800;letter-spacing:2px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 20px rgba(196,30,30,.3)}}
+.lbtn:hover{{background:linear-gradient(135deg,#c41e1e,#dc2626,#ef4444);box-shadow:0 6px 28px rgba(196,30,30,.45);transform:translateY(-1px)}}
+.lbtn:active{{transform:scale(.97)}}
+.lbtn:disabled{{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}}
+.lbtn-arr{{font-size:16px;transition:transform .2s}}.lbtn:hover .lbtn-arr{{transform:translateX(4px)}}
+.lhint{{margin-top:18px;font-size:11px;color:rgba(255,255,255,.25)}}
+.llink{{color:rgba(196,30,30,.8);text-decoration:none;font-weight:700}}.llink:hover{{color:#ef4444}}
+.pf-card{{background:linear-gradient(135deg,rgba(196,30,30,.12),rgba(30,20,20,.8));border:1px solid rgba(196,30,30,.2);border-radius:14px;padding:20px 22px;margin-bottom:14px;display:flex;align-items:center;gap:18px;box-shadow:0 4px 20px rgba(0,0,0,.3)}}
+.pf-avatar{{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#7c1010,#c41e1e);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#fff;flex-shrink:0;box-shadow:0 0 0 3px rgba(196,30,30,.2),0 4px 14px rgba(196,30,30,.3)}}
+.pf-info{{flex:1;min-width:0}}
+.pf-name{{font-size:18px;font-weight:800;color:#fff;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.pf-meta{{display:flex;gap:8px;flex-wrap:wrap}}
+.pf-tag{{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600;color:rgba(255,255,255,.7)}}
+.pf-tag-dim{{color:rgba(255,255,255,.3);border-color:rgba(255,255,255,.06)}}
+.pf-stat-box{{display:flex;flex-direction:column;align-items:center;gap:6px}}
+.pf-stat-icon{{width:36px;height:36px;border-radius:10px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:2px}}
+.pf-hits-card{{padding:0!important;overflow:hidden}}
+.pf-hits-hdr{{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.05)}}
+.pf-hits-label{{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase}}
+.pf-hits-count{{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:20px;font-size:11px;font-weight:700;padding:2px 9px;color:rgba(255,255,255,.7)}}
+.pf-copy-btn{{padding:4px 12px!important;font-size:10px!important;letter-spacing:1px!important;height:26px!important}}
+.pf-empty{{color:rgba(255,255,255,.25);font-size:12px;padding:20px 16px;text-align:center;font-style:italic}}'''
 
 def base(b):return f'<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NEXUS</title><script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script><style>{CSS}</style></head><body>{b}</body></html>'
 
@@ -554,35 +598,54 @@ def index_or_key():
             tok=uuid.uuid4().hex;ki["used"]=True;ki["activated"]=time.time();ki["used_time"]=0;ki["active_session"]=tok;session["_ks"]=tok;save_data(d)
             session["key"]=k;return redirect("/checker")
     err_div=f'<div class="err">{err}</div>' if err else ""
-    return base(f'''<div class="lw"><div class="lc"><p style="font-size:15px;font-weight:800;margin-bottom:2px;color:#fff;letter-spacing:1px">NEXUS CHECKER</p><p style="font-size:10px;color:rgba(255,255,255,.3);margin-bottom:18px">Login via Telegram OTP</p>{err_div}''')+'''
-<div class=ig><label style="font-size:10px;color:rgba(255,255,255,.35)">Telegram ID</label><input id=_tgid placeholder="e.g. 6812535526" style="text-align:center;font-size:14px;letter-spacing:1px"></div>
-<div id=_otprow class=ig style="display:none"><label style="font-size:10px;color:rgba(255,255,255,.35)">OTP Code</label><input id=_otp placeholder="000000" maxlength=6 style="text-align:center;font-size:18px;letter-spacing:6px"></div>
-<button class="btn bg" id=_otpbtn style="width:100%;margin-top:8px" onclick="_otpSend()">SEND OTP</button>
+    return base(f'''
+<div class="lw">
+<div class="lbg"><div class="lbg-orb lbg-orb1"></div><div class="lbg-orb lbg-orb2"></div></div>
+<div class="lc">
+  <div class="llogo">
+    <div class="llogo-ring"></div>
+    <div class="llogo-icon">&#9889;</div>
+  </div>
+  <div class="lbrand">NEXUS</div>
+  <div class="lsub">CARD CHECKER</div>
+  <div class="ldivider"></div>
+  {err_div}
+  <div class="lig"><label class="llabel">TELEGRAM ID</label><input id=_tgid placeholder="e.g. 6812535526" class="linput" autocomplete="off"></div>
+  <div id=_otprow class="lig" style="display:none">
+    <label class="llabel">OTP CODE</label>
+    <input id=_otp placeholder="000000" maxlength=6 class="linput otpinput" autocomplete="off">
+  </div>
+  <button class="lbtn" id=_otpbtn onclick="_otpSend()">
+    <span id=_otpbtn_txt>SEND OTP</span>
+    <span class="lbtn-arr">&#8594;</span>
+  </button>
+  <div class="lhint">Start <a href="https://t.me/nexusccorbot" target="_blank" class="llink">@nexusccorbot</a> on Telegram first</div>
+</div>
+</div>
 <script>
 var _otpState=0;
-function _otpSend(){
+function _otpSend(){{
 var btn=document.getElementById("_otpbtn");
+var txt=document.getElementById("_otpbtn_txt");
 var uid=document.getElementById("_tgid").value.trim();
-if(!uid||!/^\\d+$/.test(uid)){alert("Enter your Telegram ID");return}
-if(_otpState===0){
-btn.textContent="SENDING...";btn.disabled=true;
-fetch("/bot/send-otp",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"uid="+encodeURIComponent(uid)}).then(function(r){return r.json()}).then(function(j){
-if(j.ok){_otpState=1;btn.textContent="VERIFY OTP";btn.disabled=false;document.getElementById("_otprow").style.display="block";document.getElementById("_otp").focus()}
-else{btn.textContent="SEND OTP";btn.disabled=false;alert(j.error)}
-});
-}else{
+if(!uid||!/^\\d+$/.test(uid)){{alert("Enter your Telegram ID");return}}
+if(_otpState===0){{
+txt.textContent="SENDING...";btn.disabled=true;
+fetch("/bot/send-otp",{{method:"POST",headers:{{"Content-Type":"application/x-www-form-urlencoded"}},body:"uid="+encodeURIComponent(uid)}}).then(function(r){{return r.json()}}).then(function(j){{
+if(j.ok){{_otpState=1;txt.textContent="VERIFY OTP";btn.disabled=false;document.getElementById("_otprow").style.display="block";document.getElementById("_otp").focus()}}
+else{{txt.textContent="SEND OTP";btn.disabled=false;alert(j.error)}}
+}});
+}}else{{
 var code=document.getElementById("_otp").value.trim();
-if(!code||code.length!==6){alert("Enter 6-digit OTP");return}
-btn.textContent="VERIFYING...";btn.disabled=true;
-fetch("/bot/verify-otp",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"uid="+encodeURIComponent(uid)+"&code="+encodeURIComponent(code)}).then(function(r){return r.json()}).then(function(j){
+if(!code||code.length!==6){{alert("Enter 6-digit OTP");return}}
+txt.textContent="VERIFYING...";btn.disabled=true;
+fetch("/bot/verify-otp",{{method:"POST",headers:{{"Content-Type":"application/x-www-form-urlencoded"}},body:"uid="+encodeURIComponent(uid)+"&code="+encodeURIComponent(code)}}).then(function(r){{return r.json()}}).then(function(j){{
 if(j.ok)window.location=j.redirect;
-else{btn.textContent="VERIFY OTP";btn.disabled=false;alert(j.error)}
-});
-}
-}
-</script>
-</div></div>'''
-    return base(html)
+else{{txt.textContent="VERIFY OTP";btn.disabled=false;alert(j.error)}}
+}});
+}}
+}}
+</script>''')
 
 @app.route("/expired")
 def expired():
@@ -677,21 +740,91 @@ def profile():
         ts=time.strftime("%m/%d %H:%M",time.localtime(h.get("time",0)))
         g=h.get("gate",h.get("key","?")[:8])
         return f'<div class="r rn" data-cc="{h["cc"]}" data-info="{h.get("brand","?")} {h.get("bank","?")} {h.get("country","?")}"><span class="t tn">CCN</span><span>{h["cc"]}</span><span class="i">{h.get("brand","?")} | {h.get("bank","?")} | {h.get("country","?")} | {g} | {ts}</span></div>'
-    ch_rows="".join(ch_row(h) for h in reversed(charged_hits))or'<div style="color:#555;font-size:12px;padding:12px">No charged yet</div>'
-    cv_rows="".join(hit_row(h) for h in reversed(live_hits))or'<div style="color:#555;font-size:12px;padding:12px">No lives yet</div>'
-    cn_rows="".join(ccn_row(h) for h in reversed(ccn_hits))or'<div style="color:#555;font-size:12px;padding:12px">No CCN yet</div>'
+    ch_rows="".join(ch_row(h) for h in reversed(charged_hits))or'<div class="pf-empty">No charged hits yet</div>'
+    cv_rows="".join(hit_row(h) for h in reversed(live_hits))or'<div class="pf-empty">No live hits yet</div>'
+    cn_rows="".join(ccn_row(h) for h in reversed(ccn_hits))or'<div class="pf-empty">No CCN hits yet</div>'
+    hit_rate=round((total_cvv+total_ccn)/total_chk*100,1) if total_chk>0 else 0
+    if session.get("admin"):
+        uname="Admin";ufirst="Administrator";uid_disp="—"
+    elif session.get("tuid"):
+        tuid=session["tuid"];usr2=d.get("users",{}).get(tuid,{})
+        uname=usr2.get("username","?");ufirst=usr2.get("first_name","User");uid_disp=tuid
+    else:
+        uname=session.get("key","?")[:8];ufirst="Key User";uid_disp="—"
+    avatar_letter=(ufirst[0] if ufirst else "U").upper()
     return base(f'''<div class="wrap">
-<div class="hdr"><div><a href=/checker class="btn hbtn">BACK</a></div><div style="font-size:14px;color:#fff;font-weight:700">Profile</div></div>
-<div class="st st3">
-<div><div class="n">{tleft}</div><div class="l">Credits Left</div></div>
-<div><div class="n ng">{total_cvv+total_ccn}</div><div class="l">Total Hits</div></div>
-<div><div class="n">{total_chk}</div><div class="l">Checked</div></div>
+<div class="hdr">
+  <a href=/checker class="btn hbtn" style="display:flex;align-items:center;gap:6px">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M5 12l7 7M5 12l7-7"/></svg>BACK
+  </a>
+  <div style="font-size:13px;color:rgba(255,255,255,.5);font-weight:700;letter-spacing:1px">PROFILE</div>
+  <a href=/logout class="btn hbtn" style="color:#ef4444!important;border-color:rgba(239,68,68,.25)!important;font-size:10px!important">LOGOUT</a>
 </div>
-<div class="cd" style="padding:12px"><input id=_sr placeholder="Search card..." oninput=_sf() style="margin:0"></div>
-<div class="cd"><h2 style="color:#f59e0b">CHARGED ({len(charged_hits)})</h2><div id=ahv style="max-height:300px;overflow-y:auto">{ch_rows}</div></div>
-<div class="cd"><h2 style="color:#22c55e">LIVE ({len(live_hits)})</h2><div id=ahv2 style="max-height:300px;overflow-y:auto">{cv_rows}</div></div>
-<div class="cd"><h2 style="color:#22c55e">CCN ({len(ccn_hits)})</h2><div id=ahn style="max-height:300px;overflow-y:auto">{cn_rows}</div></div>
-<div style="text-align:center;margin-top:16px"><a href=/logout class="btn hbtn" style="padding:8px 24px;font-size:11px;color:#ef4444!important;border-color:rgba(239,68,68,.3)!important">LOGOUT</a></div>
+<div class="pf-card">
+  <div class="pf-avatar">{avatar_letter}</div>
+  <div class="pf-info">
+    <div class="pf-name">{ufirst}</div>
+    <div class="pf-meta">
+      <span class="pf-tag">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.29 9.18 19.79 19.79 0 01.22 4 2 2 0 012.2 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.29 6.29l1.45-1.45a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        @{uname}
+      </span>
+      <span class="pf-tag pf-tag-dim">ID: {uid_disp}</span>
+    </div>
+  </div>
+</div>
+<div class="st" style="grid-template-columns:repeat(4,1fr)">
+  <div class="pf-stat-box">
+    <div class="pf-stat-icon" style="background:rgba(196,30,30,.15);border-color:rgba(196,30,30,.3)">&#128179;</div>
+    <div class="n" style="font-size:22px">{tleft}</div>
+    <div class="l">Credits</div>
+  </div>
+  <div class="pf-stat-box">
+    <div class="pf-stat-icon" style="background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.25)">&#9989;</div>
+    <div class="n ng" style="font-size:22px">{total_cvv+total_ccn}</div>
+    <div class="l">Total Hits</div>
+  </div>
+  <div class="pf-stat-box">
+    <div class="pf-stat-icon" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)">&#128203;</div>
+    <div class="n" style="font-size:22px">{total_chk}</div>
+    <div class="l">Checked</div>
+  </div>
+  <div class="pf-stat-box">
+    <div class="pf-stat-icon" style="background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.25)">&#128200;</div>
+    <div class="n" style="font-size:22px;color:#f59e0b">{hit_rate}%</div>
+    <div class="l">Hit Rate</div>
+  </div>
+</div>
+<div class="cd" style="padding:10px 14px">
+  <div style="display:flex;align-items:center;gap:8px">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <input id=_sr placeholder="Search by BIN, bank or country..." oninput=_sf() style="margin:0;border:none;background:transparent;padding:2px 0;font-size:13px">
+  </div>
+</div>
+<div class="cd pf-hits-card">
+  <div class="pf-hits-hdr">
+    <span class="pf-hits-label" style="color:#f59e0b">&#9889; CHARGED</span>
+    <span class="pf-hits-count">{len(charged_hits)}</span>
+    <button class="btn bs pf-copy-btn" onclick="_cpSection('ahv')" style="margin-left:auto">COPY</button>
+  </div>
+  <div id=ahv style="max-height:260px;overflow-y:auto">{ch_rows}</div>
+</div>
+<div class="cd pf-hits-card">
+  <div class="pf-hits-hdr">
+    <span class="pf-hits-label" style="color:#22c55e">&#10003; LIVE</span>
+    <span class="pf-hits-count">{len(live_hits)}</span>
+    <button class="btn bs pf-copy-btn" onclick="_cpSection('ahv2')" style="margin-left:auto">COPY</button>
+  </div>
+  <div id=ahv2 style="max-height:260px;overflow-y:auto">{cv_rows}</div>
+</div>
+<div class="cd pf-hits-card">
+  <div class="pf-hits-hdr">
+    <span class="pf-hits-label" style="color:#60a5fa">&#9670; CCN</span>
+    <span class="pf-hits-count">{len(ccn_hits)}</span>
+    <button class="btn bs pf-copy-btn" onclick="_cpSection('ahn')" style="margin-left:auto">COPY</button>
+  </div>
+  <div id=ahn style="max-height:260px;overflow-y:auto">{cn_rows}</div>
+</div>
 </div>
 <script>
 window._sf=function(){{
@@ -703,6 +836,16 @@ var info=(rows[i].getAttribute('data-info')||'').toLowerCase();
 rows[i].style.display=(!q||cc.startsWith(q)||info.includes(q))?'':'none';
 }}
 }};
+function _cpSection(id){{
+var box=document.getElementById(id);if(!box)return;
+var rows=box.querySelectorAll('.r');var lines=[];
+rows.forEach(function(r){{var sp=r.querySelector('span:nth-child(2)');if(sp)lines.push(sp.textContent.trim());}});
+if(!lines.length)return;
+navigator.clipboard.writeText(lines.join('\\n')).then(function(){{
+var btn=event.target;btn.textContent='COPIED!';btn.style.color='#22c55e';
+setTimeout(function(){{btn.textContent='COPY';btn.style.color='';}},1500);
+}});
+}}
 </script>''')
 
 @app.route("/checker")
@@ -2303,7 +2446,7 @@ def bot_send_otp():
             headers={"Content-Type":"application/json"}),timeout=10)
         return jsonify({"ok":True,"msg":"OTP sent to your Telegram"})
     except Exception as e:
-        return jsonify({"error":f"Could not send OTP. Message @hadesAUTHbot first with /start"}),400
+        return jsonify({"error":f"Could not send OTP. Message @nexusccorbot first with /start"}),400
 
 @app.route("/bot/verify-otp",methods=["POST"])
 def bot_verify_otp():
